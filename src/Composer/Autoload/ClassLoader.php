@@ -374,10 +374,8 @@ class ClassLoader
 
         $first = $class[0];
         if (isset($this->prefixLengthsPsr4[$first])) {
-            $subPath = $class;
-            while (false !== $lastPos = strrpos($subPath, '\\')) {
-                $subPath = substr($subPath, 0, $lastPos);
-                $search = $subPath.'\\';
+            while (false !== $lastPos = strrpos($class, '\\')) {
+                $search = substr($class, 0, $lastPos).'\\';
                 if (isset($this->prefixDirsPsr4[$search])) {
                     $length = $this->prefixLengthsPsr4[$first][$search];
                     foreach ($this->prefixDirsPsr4[$search] as $dir) {
